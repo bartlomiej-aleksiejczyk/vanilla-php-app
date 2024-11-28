@@ -8,8 +8,8 @@ use Shared\Database\MigrationManager;
 use Shared\Database\EntityGenerator;
 
 $pdo = require 'config/db.php';
-$migrationManager = new MigrationManager($pdo, __DIR__ . '/migrations');
-$entityGenerator = new EntityGenerator($pdo, __DIR__ . '/entities');
+$migrationManager = new MigrationManager($pdo, __DIR__ . '/src/Resources/Migrations');
+$entityGenerator = new EntityGenerator($pdo, __DIR__ . '/src/Resources/entities');
 
 $options = getopt('', ['migrate', 'create-migration:', 'generate-entities']);
 
