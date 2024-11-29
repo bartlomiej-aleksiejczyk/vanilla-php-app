@@ -1,0 +1,16 @@
+{
+    "name": "bartlomiej-aleksiejczyk/pest-js",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "BartlomiejAleksiejczyk\\PestJs\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "bartlomiej-aleksiejczyk",
+            "email": "bartlomiej.aleksiejczyk@gmail.com"
+        }
+    ],
+    "require": {}
+}
