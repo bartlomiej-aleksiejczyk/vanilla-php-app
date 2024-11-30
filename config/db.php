@@ -1,7 +1,7 @@
 <?php
 
-$rootDir = dirname(__DIR__, 1); 
-$databaseFile = $rootDir . '/simple_blog.db';
+$rootDir = dirname(__DIR__, 1);
+$databaseFile = $rootDir . '/db/simple_blog.db';
 
 $dsn = "sqlite:$databaseFile";
 

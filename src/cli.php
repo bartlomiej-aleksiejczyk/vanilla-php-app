@@ -1,14 +1,14 @@
 <?php
 
-require_once __DIR__ . '/vendor/autoload.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 require_once 'config/db.php';
 
 use BartlomiejAleksiejczyk\PestJs\Shared\Database\MigrationManager;
 use BartlomiejAleksiejczyk\PestJs\Shared\Database\EntityGenerator;
 
 $pdo = require 'config/db.php';
-$migrationManager = new MigrationManager($pdo, __DIR__ . '/src/Resources/Migrations');
-$entityGenerator = new EntityGenerator($pdo, __DIR__ . '/src/Resources/entities');
+$migrationManager = new MigrationManager($pdo, __DIR__ . '/Resources/Migrations');
+$entityGenerator = new EntityGenerator($pdo, __DIR__ . '/Resources/entities');
 
 $options = getopt('', ['migrate', 'create-migration:', 'generate-entities']);
 

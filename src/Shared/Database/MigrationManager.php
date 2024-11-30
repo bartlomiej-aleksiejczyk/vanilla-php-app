@@ -53,14 +53,15 @@ class MigrationManager
         $stmt->execute(['migration' => $migration]);
     }
 
-    private static function getClassNameFromFileIgnoreNamespace($filePath) {
+    private static function getClassNameFromFileIgnoreNamespace($filePath)
+    {
         if (!file_exists(filename: $filePath)) {
             throw new \Exception("File does not exist: $filePath");
         }
-    
+
         $tokens = token_get_all(file_get_contents($filePath));
         $className = '';
-    
+
         for ($i = 0; $i < count($tokens); $i++) {
             if ($tokens[$i][0] === T_CLASS) {
                 $j = $i + 1;
@@ -71,14 +72,14 @@ class MigrationManager
                 break;
             }
         }
-    
+
         if (!$className) {
             throw new \Exception("No class found in file: $filePath");
         }
-    
+
         return $className;
     }
-    
+
 
     /**
      * Run all pending migrations.
@@ -90,7 +91,7 @@ class MigrationManager
 
         foreach ($migrationFiles as $file) {
             if (in_array($file, $executedMigrations)) {
-                continue; // Skip already executed migrations
+                continue;
             }
 
             $file_path = "{$this->migrationsDir}/$file";
