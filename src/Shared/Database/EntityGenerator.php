@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared\Database;
+namespace BartlomiejAleksiejczyk\PestJs\Shared\Database;
 
 use PDO;
 

@@ -1,11 +1,10 @@
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
 require_once 'config/db.php';
-require_once 'src/Database/MigrationManager.php';
-require_once 'src/Database/EntityGenerator.php';
 
-use Shared\Database\MigrationManager;
-use Shared\Database\EntityGenerator;
+use BartlomiejAleksiejczyk\PestJs\Shared\Database\MigrationManager;
+use BartlomiejAleksiejczyk\PestJs\Shared\Database\EntityGenerator;
 
 $pdo = require 'config/db.php';
 $migrationManager = new MigrationManager($pdo, __DIR__ . '/src/Resources/Migrations');

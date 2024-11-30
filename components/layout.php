@@ -3,13 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><?= $title ?? 'Simple Blog'; ?></title>
+    <title><?= htmlspecialchars($title ?? 'Simple Blog') ?></title>
 </head>
 <body>
-    <?php include __DIR__ . '/header.php'; ?>
+    <header>
+        <h1>Simple Blog</h1>
+        <nav>
+            <a href="index.php">Home</a>
+            <a href="create.php">Create Post</a>
+        </nav>
+    </header>
     <main>
-        <?= $content ?? ''; ?>
+        <?= $content ?? '<p>No content available.</p>'; ?>
     </main>
-    <?php include __DIR__ . '/footer.php'; ?>
+    <footer>
+        <p>&copy; <?= date('Y'); ?> Simple Blog</p>
+    </footer>
 </body>
 </html>

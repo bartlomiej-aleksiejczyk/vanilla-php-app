@@ -1,6 +1,6 @@
 <?php
 
-namespace Shared\Database;
+namespace BartlomiejAleksiejczyk\PestJs\Shared\Database;
 
 use PDO;
 
@@ -53,6 +53,33 @@ class MigrationManager
         $stmt->execute(['migration' => $migration]);
     }
 
+    private static function getClassNameFromFileIgnoreNamespace($filePath) {
+        if (!file_exists(filename: $filePath)) {
+            throw new \Exception("File does not exist: $filePath");
+        }
+    
+        $tokens = token_get_all(file_get_contents($filePath));
+        $className = '';
+    
+        for ($i = 0; $i < count($tokens); $i++) {
+            if ($tokens[$i][0] === T_CLASS) {
+                $j = $i + 1;
+                while (isset($tokens[$j]) && $tokens[$j][0] === T_WHITESPACE) {
+                    $j++;
+                }
+                $className = $tokens[$j][1];
+                break;
+            }
+        }
+    
+        if (!$className) {
+            throw new \Exception("No class found in file: $filePath");
+        }
+    
+        return $className;
+    }
+    
+
     /**
      * Run all pending migrations.
      */
@@ -66,15 +93,17 @@ class MigrationManager
                 continue; // Skip already executed migrations
             }
 
-            require_once "{$this->migrationsDir}/$file";
-            $className = pathinfo($file, PATHINFO_FILENAME);
+            $file_path = "{$this->migrationsDir}/$file";
+            require_once "$file_path";
+
+            $className = MigrationManager::getClassNameFromFileIgnoreNamespace($file_path);
 
             if (class_exists($className)) {
                 echo "Running migration: $file\n";
                 (new $className($this->pdo))->up();
                 $this->saveMigration($file);
             } else {
-                echo "Skipping $file: Migration class not found.\n";
+                echo "Skipping $file with classname $className: Migration class not found .\n";
             }
         }
     }
